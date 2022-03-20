@@ -3,6 +3,7 @@ import numpy as np
 from scipy.io import wavfile
 from pydub import AudioSegment, silence
 
+whistle_freq = 2000
 
 plt.rcParams['figure.dpi'] = 100
 plt.rcParams['figure.figsize'] = (9, 7)
@@ -85,15 +86,19 @@ plt.ylabel("signal, relative units")
 plt.tight_layout()
 
 g = plt.figure(2)
-plt.subplot(len(singal_sample),1,1)
+plt.subplot(3,1,1)
 plt.plot(freq, fft_spectrum_abs)
 plt.xlabel("frequency, Hz")
 plt.ylabel("Amplitude, units")
 
 for i in range(len(singal_sample)):
-    plt.subplot(len(singal_sample),1,i+2)
+    plt.subplot(len(singal_sample) +1 ,1,i+2)
     plt.plot(freq_list[i], fft_spectrum_abs_list[i])
-    plt.xlabel("frequency, Hz")
+    if any(arr_element >= whistle_freq for arr_element in freq_list[i]):
+        plt.xlabel("frequency, Hz  " + str(nonsilence[i]) + " -----> Whistle")
+    else:
+        plt.xlabel("frequency, Hz  " + str(nonsilence[i]) + " -----> Non whistle")
+    #plt.xlabel("frequency, Hz  " + str(nonsilence[i]))
     plt.ylabel("Amplitude, units")
 
 plt.show()
