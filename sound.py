@@ -8,7 +8,7 @@ whistle_freq = 2000
 plt.rcParams['figure.dpi'] = 100
 plt.rcParams['figure.figsize'] = (9, 7)
 
-FileName = "Whistle Blow Sound.wav"
+FileName = "mix2.wav"
 sampFreq, sound = wavfile.read(FileName)
 
 sound = sound / 2.0**15
@@ -33,8 +33,8 @@ for time_interval in nonsilence:
 
 print("singal_sample[i] ", singal_sample[0])
 print("Length of nonsilence general array: ", len(singal_sample))
-print("Length of nonsilence array 1 ", len(singal_sample[0]))
-print("Length of nonsilence array 2 ", len(singal_sample[1]))
+# print("Length of nonsilence array 1 ", len(singal_sample[0]))
+# print("Length of nonsilence array 2 ", len(singal_sample[1]))
 
 length_in_s = sound.shape[0] / sampFreq
 #print(type(sound[0]))
@@ -52,8 +52,8 @@ signal_list = []
 for sig in singal_sample:
     signal_list.append(sig[:,0])
     
-print("signal_array[0]", signal_list[0])
-print("signal_array[1]", signal_list[1])
+# print("signal_array[0]", signal_list[0])
+# print("signal_array[1]", signal_list[1])
 
 fft_spectrum = np.fft.rfft(signal)
 fft_spectrum_list = []
